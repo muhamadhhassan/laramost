@@ -1,7 +1,9 @@
 {
     "name": "muhamadhhassan/laramost",
-    "description": "This package includes Mattermost drivers for Laravel different features like logging and notifications",
+    "description": "This package includes a Monolog handler and formatter for Mattermost to use in a Laravel log channel",
     "type": "library",
+    "license": "MIT",
+    "keywords": ["log","logging", "mattermost", "monolog", "laravel"],
     "authors": [
         {
             "name": "muhamadhhassan",
@@ -15,11 +17,12 @@
         }
     },
     "require-dev": {
+        "php": ">=8.0",
         "phpunit/phpunit": "^9.5",
         "orchestra/testbench": "^7.7"
     },
     "require": {
-        "monolog/monolog": "2.8",
+        "monolog/monolog": ">=2.8 <= 3.2",
         "guzzlehttp/guzzle": "^7.4",
         "composer/ca-bundle": "^1.3"
     },
