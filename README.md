@@ -52,4 +52,4 @@ Log::channel('mattermost')->error('Something went wrong', ['user_id' => 5]);
 ```
 
 Will send the following message to your mattermost channel:
-[![Screenshot-2022-09-23-172832.png](https://i.postimg.cc/HkpnNgT8/Screenshot-2022-09-23-172832.png)](https://postimg.cc/bsBqG4Dq)
+![error-message.png](docs/images/error-message.png)
