@@ -69,4 +69,4 @@ $logger->error('Something went wrong', ['user_id' => 5]);
 Both Will send the following message to your mattermost channel:
 ![error-message.png](docs/images/error-message.png)
 
-> :warning: **Warning**: When you log to the `mattermost` channel make sure that the level is greater than or equals the one defined in `config/logging.php`
+> **Warning**: When you log to the `mattermost` channel make sure that the level is greater than or equals the one defined in `config/logging.php`
