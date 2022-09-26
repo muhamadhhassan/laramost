@@ -8,28 +8,7 @@ Laramost is a [Monolog](https://github.com/Seldaek/monolog) handler channel for 
 $ composer require muhamadhhassan/laramost
 ```
 
-## Configuration
-
-In your `config/logging.php` add the `mattermost` channel to the `channels` array:
-
-```php
-use LaraMost\Formatter\MattermostFormatter;
-use LaraMost\Handler\MattermostWebhookHandler;
-
-'channels' => [
-    'mattermost' => [
-        'driver'  => 'monolog',
-        'handler' => MattermostWebhookHandler::class,
-        'formatter' => MattermostFormatter::class,
-        'with' => [
-            'hook' => 'https://your-mattermost.com/hooks/random-string',
-        ],
-        'level' => 'error'
-    ],
-],
-```
-
-### Levels
+## Levels
 
 Monolog levels are used to set the message color and icon
 
@@ -45,11 +24,49 @@ Monolog levels are used to set the message color and icon
 
 ## Usage
 
-Simply, using Laravel `Log` facade
+### In Laravel Apps
+
+In your `config/logging.php` add the `mattermost` channel to the `channels` array:
+
+```php
+use LaraMost\Formatter\MattermostFormatter;
+use LaraMost\Handler\MattermostWebhookHandler;
+
+'channels' => [
+    'mattermost' => [
+        'driver'  => 'monolog',
+        'handler' => MattermostWebhookHandler::class,
+        'formatter' => MattermostFormatter::class,
+        'with' => [
+            'hook' => 'https://your-mattermost.com/hooks/xxx-generatedkey-xxx',
+        ],
+        'level' => 'error'
+    ],
+],
+```
+
+Then simply, using Laravel `Log` facade:
 
 ```php
 Log::channel('mattermost')->error('Something went wrong', ['user_id' => 5]);
 ```
 
-Will send the following message to your mattermost channel:
+### In any PHP Apps
+
+```php
+use Monolog\Logger;
+use LaraMost\Formatter\MattermostFormatter;
+use LaraMost\Handler\MattermostWebhookHandler;
+
+$logger = new Logger('application');
+$handler = new MattermostWebhookHandler('https://your-mattermost.com/hooks/xxx-generatedkey-xxx', Logger::ERROR);
+$handler->setFormatter(new MattermostFormatter())
+$logger->pushHandler($handler);
+
+$logger->error('Something went wrong', ['user_id' => 5]);
+```
+
+Both Will send the following message to your mattermost channel:
 ![error-message.png](docs/images/error-message.png)
+
+> :warning: **Warning**: When you log to the `mattermost` channel make sure that the level is greater than or equals the one defined in `config/logging.php`

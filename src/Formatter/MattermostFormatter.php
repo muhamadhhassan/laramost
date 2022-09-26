@@ -9,8 +9,8 @@ class MattermostFormatter implements FormatterInterface
 {
     public function format(array $record): array
     {
-        $env = strtoupper(env('APP_ENV') ?? '');
-        $appName = env('APP_NAME');
+        $env = strtoupper(getenv('APP_ENV') ?? '');
+        $appName = getenv('APP_NAME');
         $date = $record['datetime']->jsonSerialize();
         $message = $record['message'];
         $formattedDate = date('Y-m-d H:i:s e', strtotime($date));
